@@ -1,3 +1,4 @@
+import BoxProduct from "../../components/BoxProduct";
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
 
@@ -7,8 +8,13 @@ const Product = () => {
       <Header />
       <div className="flex ">
         <Nav />
-        <div className="ml-0 lg:ml-64  mt-5">
-          <h1 className="text-4xl">Main Content</h1>
+        <div className="ml-4 lg:ml-72 mt-5 flex gap-9 w-full flex-wrap">
+          <BoxProduct />
+          <BoxProduct />
+          <BoxProduct />
+          <BoxProduct />
+          <BoxProduct />
+          <BoxProduct />
         </div>
       </div>
     </>
