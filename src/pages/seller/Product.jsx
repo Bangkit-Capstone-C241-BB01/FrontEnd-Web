@@ -8,7 +8,7 @@ const Product = () => {
       <Header />
       <div className="flex ">
         <Nav />
-        <div className="ml-4 lg:ml-72 mt-5 flex gap-9 w-full flex-wrap">
+        <div className="font-roboto ml-4 lg:ml-72 mt-5 flex gap-9 w-full flex-wrap">
           <BoxProduct />
           <BoxProduct />
           <BoxProduct />

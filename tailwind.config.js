@@ -7,6 +7,9 @@ export default {
         primary: "rgba(10, 77, 104, 1)",
         secondary: "rgba(6, 154, 142, 1)",
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
   },
   variants: {
