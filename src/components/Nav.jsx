@@ -3,12 +3,16 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { BiPackage, BiArrowFromBottom, BiSolidUser } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logokecil.png";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const handleLogOut = () => {
+    navigate("/");
+  };
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -28,7 +32,7 @@ const Nav = () => {
         <nav className="mt-4 flex flex-col h-3/4 justify-between">
           <ul>
             <li className="p-2 cursor-pointer ">
-              <NavLink to="/" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto  ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
+              <NavLink to="/product" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto  ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
                 <BiPackage size={20} className="mr-2" />
                 Product
               </NavLink>
@@ -49,7 +53,9 @@ const Nav = () => {
               </NavLink>
             </li>
           </ul>
-          <button className="font-roboto p-2 m-4 rounded-full bg-red-700 text-white hover:bg-red-900">Log Out</button>
+          <button onClick={handleLogOut} className="font-roboto p-2 m-4 rounded-full bg-red-700 text-white hover:bg-red-900">
+            Log Out
+          </button>
         </nav>
       </div>
 

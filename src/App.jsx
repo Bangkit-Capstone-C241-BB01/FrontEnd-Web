@@ -5,12 +5,16 @@ import Profile from "./pages/seller/Profile";
 import DetailProduct from "./pages/seller/DetailProduct";
 import Welcome from "./pages/seller/Welcome";
 import AdminLogin from "./pages/admin/AdminLogin";
+import SellerLogin from "./pages/seller/SellerLogin";
+import SellerRegister from "./pages/seller/SellerRegister";
 function App() {
   return (
     <>
       <Routes>
         {/* Seller Routes */}
         <Route path="/" element={<Welcome />} />
+        <Route path="/register" element={<SellerRegister />} />
+        <Route path="/login" element={<SellerLogin />} />
         <Route path="/product" element={<Product />} />
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/profile" element={<Profile />} />
