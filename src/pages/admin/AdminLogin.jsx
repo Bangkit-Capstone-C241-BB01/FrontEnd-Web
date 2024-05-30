@@ -18,7 +18,7 @@ const AdminLogin = () => {
       <img src={logobesar} alt="" className="w-2/4 lg:w-1/6 md:w-2/6" />
       <h1 className="text-2xl p-2 md:text-4xl">Welcome BrainStore Admin</h1>
       <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center">
-        <input type="text" className="md:text-3xl text-2xl bg-primary text-white md:p-3 md:m-2 p-1 m-1 rounded hover:opacity-90 w-3/4 md:w-2/4" placeholder="Username" />
+        <input type="email" className="md:text-3xl text-2xl bg-primary text-white md:p-3 md:m-2 p-1 m-1 rounded hover:opacity-90 w-3/4 md:w-2/4" placeholder="Email" />
         <div className="relative  w-3/4 md:w-2/4">
           <input type={passwordVisible ? "text" : "password"} className="md:text-3xl text-2xl p-1 bg-primary text-white md:p-3  rounded hover:opacity-90 w-full" placeholder="Password" />
           <button type="button" className="absolute md:top-4 right-3 top-2 text-xl text-white" onClick={togglePasswordVisibility}>

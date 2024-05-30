@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { BiPackage, BiArrowFromBottom, BiSolidUser, BiSolidBarChartAlt2 } from "react-icons/bi";
+import { BiPackage, BiArrowFromBottom, BiSolidUser, BiSolidBarChartAlt2, BiSpreadsheet } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logokecil.png";
@@ -39,6 +39,15 @@ const Nav = ({ role }) => {
                   >
                     <BiSolidBarChartAlt2 size={20} className="mr-2" />
                     Dashboard
+                  </NavLink>
+                </li>{" "}
+                <li className="p-2 cursor-pointer">
+                  <NavLink
+                    to="/admin/appeals"
+                    className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
+                  >
+                    <BiSpreadsheet size={20} className="mr-2" />
+                    Appeal List
                   </NavLink>
                 </li>
                 <li className="p-2 cursor-pointer">
