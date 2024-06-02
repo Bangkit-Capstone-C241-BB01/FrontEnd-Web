@@ -22,7 +22,7 @@ const SearchBar = () => {
           <AiOutlineHeart size={24} className="mr-2" />
           Favorite
         </NavLink>
-        <NavLink to="/Profile" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto px-2  ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
+        <NavLink to="/profile" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto px-2  ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
           <AiOutlineUser size={24} className="mr-2" />
           Profile
         </NavLink>

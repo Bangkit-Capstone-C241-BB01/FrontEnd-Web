@@ -2,7 +2,7 @@ import { useState } from "react";
 import Nav from "../../components/Nav";
 import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 import profile from "../../assets/profile.jpg";
-const Profile = () => {
+const SellerProfile = () => {
   const [product, setProduct] = useState({
     ShopName: "",
     SellerName: "",
@@ -138,4 +138,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default SellerProfile;
