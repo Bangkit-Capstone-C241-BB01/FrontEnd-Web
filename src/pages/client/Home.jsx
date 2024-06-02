@@ -13,13 +13,13 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col font-roboto">
       <SearchBar />
-      <div className="flex items-center px-4 pt-2">
+      <div className="flex items-center px-4 py-2 bg-slate-100">
         <img src={user.avatar} alt="User Avatar" className="w-8 h-8 lg:w-11 lg:h-11 rounded-full mr-3" />
         <span className="text-md lg:text-xl">
           Welcome, <span className="font-bold text-secondary"> John Doe</span>
         </span>
       </div>
-      <main className="pt-3 pb-14 lg:pb-0">
+      <main className="pt-1 pb-14 lg:pb-0">
         <Carousel slides={slides} />
         <CategoryList />
         <ProductList />

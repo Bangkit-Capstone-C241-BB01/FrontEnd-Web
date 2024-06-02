@@ -14,6 +14,7 @@ import WelcomeSeller from "./pages/seller/WelcomeSeller";
 import Welcome from "./pages/client/Welcome";
 import Login from "./pages/client/Login";
 import Register from "./pages/client/Register";
+import Favorites from "./pages/client/Favorites";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/favorites" element={<Favorites />} />
 
         {/* Seller Routes */}
         <Route path="/seller" element={<WelcomeSeller />} />
