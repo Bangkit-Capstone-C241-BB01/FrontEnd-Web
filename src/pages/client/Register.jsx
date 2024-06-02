@@ -1,12 +1,12 @@
 import { useState } from "react";
 import logokecil from "../../assets/logokecilbewarna.png";
 import { Link, useNavigate } from "react-router-dom";
-const SellerRegister = () => {
+const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    navigate("/seller/product");
+    navigate("/home");
   };
 
   const togglePasswordVisibility = () => {
@@ -24,15 +24,11 @@ const SellerRegister = () => {
           <form>
             <div className="mb-1">
               <label className="block mb-1 lg:text-xl" htmlFor="email">
-                Seller Name
+                Name
               </label>
               <input type="text" id="sellerName" className="w-full p-2 text-secondary rounded mb-1" required />
               <label className="block mb-1 lg:text-xl" htmlFor="email">
-                Store Name
-              </label>
-              <input type="text" id="storeName" className="w-full p-2 text-secondary rounded mb-1" required />
-              <label className="block mb-1 lg:text-xl" htmlFor="email">
-                Seller Email
+                Email
               </label>
               <input type="email" id="sellerEmail" className="w-full p-2 text-secondary rounded" required />
             </div>
@@ -63,7 +59,7 @@ const SellerRegister = () => {
           <div className="mt-4 text-center">
             <div className="mt-2">
               Already have an account?
-              <Link to={"/seller/login"} className="text-secondary ml-2 hover:underline">
+              <Link to={"/login"} className="text-secondary ml-2 hover:underline">
                 Login!
               </Link>
             </div>
@@ -74,4 +70,4 @@ const SellerRegister = () => {
   );
 };
 
-export default SellerRegister;
+export default Register;

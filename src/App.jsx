@@ -3,25 +3,35 @@ import Product from "./pages/seller/Product";
 import AddProduct from "./pages/seller/AddProduct";
 import Profile from "./pages/seller/Profile";
 import DetailProduct from "./pages/seller/DetailProduct";
-import Welcome from "./pages/seller/Welcome";
 import AdminLogin from "./pages/admin/AdminLogin";
 import SellerLogin from "./pages/seller/SellerLogin";
 import SellerRegister from "./pages/seller/SellerRegister";
 import AdminDasboard from "./pages/admin/AdminDasboard";
 import AdminProfile from "./pages/admin/AdminProfile";
 import AdminAppeals from "./pages/admin/AdminAppeal";
+import Home from "./pages/client/Home";
+import WelcomeSeller from "./pages/seller/WelcomeSeller";
+import Welcome from "./pages/client/Welcome";
+import Login from "./pages/client/Login";
+import Register from "./pages/client/Register";
 function App() {
   return (
     <>
       <Routes>
-        {/* Seller Routes */}
+        {/* Client Routes */}
         <Route path="/" element={<Welcome />} />
-        <Route path="/register" element={<SellerRegister />} />
-        <Route path="/login" element={<SellerLogin />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/addProduct" element={<AddProduct />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/detail/:id" element={<DetailProduct />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Seller Routes */}
+        <Route path="/seller" element={<WelcomeSeller />} />
+        <Route path="/seller/register" element={<SellerRegister />} />
+        <Route path="/seller/login" element={<SellerLogin />} />
+        <Route path="/seller/product" element={<Product />} />
+        <Route path="/seller/addProduct" element={<AddProduct />} />
+        <Route path="/seller/profile" element={<Profile />} />
+        <Route path="/seller/detail/:id" element={<DetailProduct />} />
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />

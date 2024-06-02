@@ -1,6 +1,6 @@
 import avatar from "../assets/profile.jpg";
 import { BiSolidUser } from "react-icons/bi";
-const user = {
+export const user = {
   name: "Toko John Doe",
   avatar: avatar,
 };

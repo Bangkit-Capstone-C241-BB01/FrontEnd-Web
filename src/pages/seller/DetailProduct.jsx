@@ -11,7 +11,7 @@ const DetailProduct = () => {
     return <p>Product not found</p>;
   }
   const handleBack = () => {
-    navigate("/product");
+    navigate("/seller/product");
   };
   return (
     <>

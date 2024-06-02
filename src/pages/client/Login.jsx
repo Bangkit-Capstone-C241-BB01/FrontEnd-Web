@@ -2,12 +2,12 @@ import { useState } from "react";
 import logokecil from "../../assets/logokecilbewarna.png";
 import { Link, useNavigate } from "react-router-dom";
 
-const SellerLogin = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/seller/product");
+    navigate("/home");
   };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -49,7 +49,7 @@ const SellerLogin = () => {
             </a>
             <div className="mt-2">
               Dont have an account?
-              <Link to={"/seller/register"} className="text-secondary ml-2 hover:underline">
+              <Link to={"/register"} className="text-secondary ml-2 hover:underline">
                 Register here!
               </Link>
             </div>
@@ -60,4 +60,4 @@ const SellerLogin = () => {
   );
 };
 
-export default SellerLogin;
+export default Login;

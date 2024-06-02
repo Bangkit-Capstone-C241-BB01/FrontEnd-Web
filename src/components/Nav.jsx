@@ -10,7 +10,7 @@ const Nav = ({ role }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    navigate("/");
+    navigate("/seller");
   };
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -40,7 +40,7 @@ const Nav = ({ role }) => {
                     <BiSolidBarChartAlt2 size={20} className="mr-2" />
                     Dashboard
                   </NavLink>
-                </li>{" "}
+                </li>
                 <li className="p-2 cursor-pointer">
                   <NavLink
                     to="/admin/appeals"
@@ -64,7 +64,7 @@ const Nav = ({ role }) => {
               <>
                 <li className="p-2 cursor-pointer">
                   <NavLink
-                    to="/product"
+                    to="/seller/product"
                     className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
                   >
                     <BiPackage size={20} className="mr-2" />
@@ -73,7 +73,7 @@ const Nav = ({ role }) => {
                 </li>
                 <li className="p-2 cursor-pointer">
                   <NavLink
-                    to="/addProduct"
+                    to="/seller/addProduct"
                     className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
                   >
                     <BiArrowFromBottom size={20} className="mr-2" />
@@ -82,7 +82,7 @@ const Nav = ({ role }) => {
                 </li>
                 <li className="p-2 cursor-pointer">
                   <NavLink
-                    to="/profile"
+                    to="/seller/profile"
                     className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
                   >
                     <BiSolidUser size={20} className="mr-2" />
