@@ -1,8 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "../../components/Nav";
 import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
-import profile from "../../assets/profile.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile } from "../../redux/features/profile/profileThunks";
 const SellerProfile = () => {
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.profile);
+  const [profileData, setProfileData] = useState("");
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (data) {
+      setProfileData(data);
+    }
+  }, [data]);
+
   const [product, setProduct] = useState({
     ShopName: "",
     SellerName: "",
@@ -66,7 +81,7 @@ const SellerProfile = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-2 flex flex-col items-center">
               <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 mb-2">
-                <img src={product.imagePreviewUrl || profile} alt="Profile picture" className="w-full h-full" />
+                <img src={product.imagePreviewUrl || profileData.user_img} alt="Profile picture" className="w-full h-full" />
               </div>
               <div className="flex items-center">
                 <label className={`cursor-pointer ${product.imagePreviewUrl ? "hidden" : "bg-gray-200 hover:bg-gray-300"} text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center`} htmlFor="image">
@@ -92,7 +107,7 @@ const SellerProfile = () => {
                 type="text"
                 id="ShopName"
                 name="ShopName"
-                value={product.ShopName}
+                value={profileData.store_name}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Shop Name"
@@ -106,7 +121,7 @@ const SellerProfile = () => {
                 type="text"
                 id="SellerName"
                 name="SellerName"
-                value={product.SellerName}
+                value={profileData.user_name}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Seller Name"
@@ -120,7 +135,7 @@ const SellerProfile = () => {
                 type="email"
                 id="SellerEmail"
                 name="SellerEmail"
-                value={product.SellerEmail}
+                value={profileData.user_email}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Email"

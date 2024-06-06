@@ -16,31 +16,105 @@ import Login from "./pages/client/Login";
 import Register from "./pages/client/Register";
 import Favorites from "./pages/client/Favorites";
 import Profile from "./pages/client/Profile";
+import RequireAuth from "./components/RequireAuth";
 function App() {
   return (
     <>
       <Routes>
         {/* Client Routes */}
         <Route path="/" element={<Welcome />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/home"
+          element={
+            <RequireAuth role="customer">
+              <Home />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <RequireAuth role="customer">
+              <Favorites />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth role="customer">
+              <Profile />
+            </RequireAuth>
+          }
+        />
+
         {/* Seller Routes */}
         <Route path="/seller" element={<WelcomeSeller />} />
         <Route path="/seller/register" element={<SellerRegister />} />
         <Route path="/seller/login" element={<SellerLogin />} />
-        <Route path="/seller/product" element={<Product />} />
-        <Route path="/seller/addProduct" element={<AddProduct />} />
-        <Route path="/seller/profile" element={<SellerProfile />} />
-        <Route path="/seller/detail/:id" element={<DetailProduct />} />
+        <Route
+          path="/seller/products"
+          element={
+            <RequireAuth role="seller">
+              <Product />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/addProduct"
+          element={
+            <RequireAuth role="seller">
+              <AddProduct />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/profile"
+          element={
+            <RequireAuth role="seller">
+              <SellerProfile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/detail/:id"
+          element={
+            <RequireAuth role="seller">
+              <DetailProduct />
+            </RequireAuth>
+          }
+        />
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDasboard />} />
-        <Route path="/admin/profile" element={<AdminProfile />} />
-        <Route path="/admin/appeals" element={<AdminAppeals />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <RequireAuth role="admin">
+              <AdminDasboard />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/admin/profile"
+          element={
+            <RequireAuth role="admin">
+              <AdminProfile />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/admin/appeals"
+          element={
+            <RequireAuth role="admin">
+              <AdminAppeals />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </>
   );
