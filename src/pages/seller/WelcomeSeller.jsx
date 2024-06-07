@@ -1,9 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import logobesar from "../../assets/logobesar.png";
+import { useEffect } from "react";
+import { getTokenSeller } from "../../utils/cookies";
 
 const WelcomeSeller = () => {
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const token = getTokenSeller();
+    if (token) {
+      navigate("/seller/products");
+    }
+  }, [navigate]);
   const handleLogin = () => {
     navigate("/seller/login");
   };

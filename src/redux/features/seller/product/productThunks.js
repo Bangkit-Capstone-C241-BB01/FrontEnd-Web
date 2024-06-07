@@ -24,6 +24,6 @@ export const addProduct = createAsyncThunk("sellerProduct/addProduct", async (pr
     const response = await addProductSeller(product);
     return response;
   } catch (error) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error.response.data);
   }
 });

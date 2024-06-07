@@ -1,17 +1,18 @@
 import axiosInstance from "../../../utils/axiosConfig";
 
 export const fetchProfile = async (role) => {
-  try {
-    const response = await axiosInstance.get("/profiles", {
-      role: role,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
+  const response = await axiosInstance.get("/profiles", {
+    role: role,
+  });
+  return response.data;
 };
 
 export const updateProfile = async (profileData) => {
-  const response = await axiosInstance.put("/profiles", profileData);
+  const response = await axiosInstance.put("/profiles", profileData, {
+    role: "seller",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };

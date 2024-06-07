@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/features/seller/product/productThunks";
 import Nav from "../../components/Nav";
 import Header from "../../components/Header";
@@ -7,6 +7,7 @@ import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.sellerProduct);
   const [product, setProduct] = useState({
     product_name: "",
     product_price: "",
@@ -66,6 +67,8 @@ const AddProduct = () => {
         <div className="ml-0 lg:ml-64 p-4 w-full font-roboto">
           <div className="mx-auto">
             <h1 className="text-3xl font-bold mb-6">Add Product</h1>
+            {loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white">Loading...</div>}
+            {error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white">Error: {error.msg}</div>}
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-bold mb-2" htmlFor="image">
@@ -76,7 +79,7 @@ const AddProduct = () => {
                     <FaFileUpload className="w-4 h-4 mr-2" />
                     Choose File
                   </label>
-                  <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} className="hidden" required />
+                  <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} className="hidden" />
                   {product.img_product && (
                     <div className="flex items-center">
                       <img src={URL.createObjectURL(product.img_product)} alt="Preview" className="ml-4 w-20 h-20 object-cover rounded" />

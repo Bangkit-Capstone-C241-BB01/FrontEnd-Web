@@ -6,11 +6,13 @@ const authSlice = createSlice({
   initialState: {
     isAuthenticated: false,
     error: null,
+    loading: false,
   },
   reducers: {
     logout(state) {
       state.isAuthenticated = false;
       state.error = null;
+      state.loading = false;
     },
   },
   extraReducers: (builder) => {
@@ -18,10 +20,16 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state) => {
         state.isAuthenticated = true;
         state.error = null;
+        state.loading = false;
+      })
+      .addCase(login.pending, (state) => {
+        state.isAuthenticated = false;
+        state.loading = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.isAuthenticated = false;
         state.error = action.payload;
+        state.loading = false;
       })
       .addCase(register.fulfilled, (state) => {
         state.isAuthenticated = true;
@@ -30,6 +38,10 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isAuthenticated = false;
         state.error = action.payload;
+      })
+      .addCase(register.pending, (state) => {
+        state.isAuthenticated = false;
+        state.loading = true;
       });
   },
 });

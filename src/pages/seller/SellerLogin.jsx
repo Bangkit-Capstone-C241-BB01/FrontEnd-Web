@@ -11,7 +11,7 @@ const SellerLogin = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, error } = useSelector((state) => state.auth);
+  const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
   useEffect(() => {
     const token = getTokenSeller();
     if (token) {
@@ -38,6 +38,8 @@ const SellerLogin = () => {
       <div className=" flex justify-center items-center ">
         <div className=" rounded-xl bg-primary shadow-md  p-8 w-3/4 lg:w-2/4 text-white">
           <h2 className="text-2xl lg:text-4xl  mb-6 text-center">Login</h2>
+          {loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white-500">Loading...</div>}
+          {error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white-500">{error.msg}</div>}
           <form>
             <div className="mb-4">
               <label className="block mb-2 lg:text-xl" htmlFor="email">

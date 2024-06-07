@@ -7,6 +7,7 @@ const profileSlice = createSlice({
     profileData: null,
     profileLoading: false,
     profileError: null,
+    updateStatus: "idle",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -26,14 +27,17 @@ const profileSlice = createSlice({
       .addCase(updateUserProfile.pending, (state) => {
         state.profileLoading = true;
         state.profileError = null;
+        state.updateStatus = "loading";
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
-        state.sellerProduct = action.payload;
+        state.profileData = action.payload;
         state.profileLoading = false;
+        state.updateStatus = "succeeded";
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
         state.profileLoading = false;
         state.profileError = action.payload;
+        state.updateStatus = "failed";
       });
   },
 });
