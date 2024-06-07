@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "../../components/SearchBar";
 import ProductList from "../../components/ProductList";
 import Footer from "../../components/Footer";
-import { user } from "../../components/Header.jsx";
+
 const Favorites = () => {
   return (
     <div className="min-h-screen flex flex-col font-roboto">

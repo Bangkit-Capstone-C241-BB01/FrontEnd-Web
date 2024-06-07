@@ -4,12 +4,17 @@ import { BiPackage, BiArrowFromBottom, BiSolidUser, BiSolidBarChartAlt2, BiSprea
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logokecil.png";
+import { logout } from "../redux/features/auth/authSlice";
+import { removeToken } from "../utils/cookies";
+import { useDispatch } from "react-redux";
 
 const Nav = ({ role }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogOut = () => {
+    dispatch(logout());
+    removeToken(role);
     navigate("/seller");
   };
   const toggleSidebar = () => {
@@ -64,11 +69,11 @@ const Nav = ({ role }) => {
               <>
                 <li className="p-2 cursor-pointer">
                   <NavLink
-                    to="/seller/product"
+                    to="/seller/products"
                     className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
                   >
                     <BiPackage size={20} className="mr-2" />
-                    Product
+                    Products
                   </NavLink>
                 </li>
                 <li className="p-2 cursor-pointer">

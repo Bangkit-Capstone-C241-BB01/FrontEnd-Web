@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard";
-import { products } from "../pages/seller/Product";
+// import { products } from "../pages/seller/Product";
 
 const ProductList = () => {
   return (

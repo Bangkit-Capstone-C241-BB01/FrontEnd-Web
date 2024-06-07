@@ -32,7 +32,7 @@ export const register = createAsyncThunk("auth/register", async ({ user_name, us
     let response;
     switch (user_role) {
       case "customer":
-        response = await registerCustomer(user_name, user_email, user_password, store_name);
+        response = await registerCustomer(user_name, user_email, user_password);
         setTokenCustomer(response.data.token);
         break;
       case "seller":

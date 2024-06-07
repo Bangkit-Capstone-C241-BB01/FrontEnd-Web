@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchProfile, updateProfile } from "./profileApi";
 
-export const fetchUserProfile = createAsyncThunk("profile/fetchUserProfile", async (_, { rejectWithValue }) => {
+export const fetchUserProfile = createAsyncThunk("profile/fetchUserProfile", async (role, { rejectWithValue }) => {
   try {
-    const data = await fetchProfile();
+    const data = await fetchProfile(role);
     return data;
   } catch (error) {
     return rejectWithValue(error.response.data);

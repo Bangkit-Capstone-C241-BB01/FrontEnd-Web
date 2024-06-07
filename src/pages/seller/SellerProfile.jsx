@@ -5,18 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../redux/features/profile/profileThunks";
 const SellerProfile = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.profile);
-  const [profileData, setProfileData] = useState("");
-
+  const profileState = useSelector((state) => state.profile);
+  const [profileData, setProfileData] = useState({});
   useEffect(() => {
-    dispatch(fetchUserProfile());
+    dispatch(fetchUserProfile("seller"));
   }, [dispatch]);
-
   useEffect(() => {
-    if (data) {
-      setProfileData(data);
+    if (profileState.profileData) {
+      setProfileData(profileState.profileData);
     }
-  }, [data]);
+  }, [profileState.profileData]);
 
   const [product, setProduct] = useState({
     ShopName: "",
@@ -32,7 +30,7 @@ const SellerProfile = () => {
       [name]: value,
     });
   };
-
+  console.log(profileData);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -74,7 +72,7 @@ const SellerProfile = () => {
 
   return (
     <div className="flex ">
-      <Nav />
+      <Nav role="seller" />
       <div className="ml-0 lg:ml-64 p-4 mt-5 w-full font-roboto">
         <div className=" mx-auto w-full">
           <h1 className="text-3xl font-bold mb-2 w-full mt-2 lg:mt-0">Profile</h1>

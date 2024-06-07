@@ -31,9 +31,21 @@ export const loginAdmin = async (user_email, user_password) => {
 };
 
 export const registerCustomer = async (user_name, user_email, user_password) => {
-  return await axiosInstance.post("/register", { user_name, user_email, user_password, user_role: "customer" });
+  return await axiosInstance.post(
+    "/register",
+    { user_name, user_email, user_password, user_role: "customer" },
+    {
+      role: "customer",
+    }
+  );
 };
 
 export const registerSeller = async (user_name, user_email, user_password, store_name) => {
-  return await axiosInstance.post("/register", { user_name, user_email, user_password, user_role: "seller", store_name });
+  return await axiosInstance.post(
+    "/register",
+    { user_name, user_email, user_password, user_role: "seller", store_name },
+    {
+      role: "seller",
+    }
+  );
 };

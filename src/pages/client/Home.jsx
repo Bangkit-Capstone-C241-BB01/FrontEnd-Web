@@ -6,7 +6,7 @@ import Banner1 from "../../assets/Banner1.png";
 import Banner2 from "../../assets/Banner2.png";
 import Banner3 from "../../assets/Banner3.png";
 import CategoryList from "../../components/CategoryList";
-import { user } from "../../components/Header.jsx";
+
 const Home = () => {
   let slides = [{ url: Banner1 }, { url: Banner2 }, { url: Banner3 }];
   console.log(user);

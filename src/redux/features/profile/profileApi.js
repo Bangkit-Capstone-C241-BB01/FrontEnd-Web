@@ -1,9 +1,9 @@
 import axiosInstance from "../../../utils/axiosConfig";
 
-export const fetchProfile = async () => {
+export const fetchProfile = async (role) => {
   try {
     const response = await axiosInstance.get("/profiles", {
-      role: "seller",
+      role: role,
     });
     return response.data;
   } catch (error) {
