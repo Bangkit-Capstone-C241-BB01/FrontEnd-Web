@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import avatar from "../../assets/profile.jpg";
 import Nav from "../../components/Nav";
 import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -111,7 +112,7 @@ const ShopProfile = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-2 flex flex-col items-center">
               <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 mb-2">
-                <img src={product.imagePreviewUrl || profileData.store_img} alt="Profile picture" className="w-full h-full" />
+                <img src={product.imagePreviewUrl || profileData.store_img || avatar} alt="Profile picture" className="w-full h-full" />
               </div>
               <div className="flex items-center">
                 <label className={`cursor-pointer ${product.imagePreviewUrl ? "hidden" : "bg-gray-200 hover:bg-gray-300"} text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center`} htmlFor="image">
@@ -155,7 +156,7 @@ const ShopProfile = () => {
                 value={product.ShopLocation}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Seller Name"
+                placeholder="Shop Location"
               />
             </div>
             <div className="mb-2 lg:mb-3">
@@ -169,7 +170,7 @@ const ShopProfile = () => {
                 value={product.ShopDescription}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Email"
+                placeholder="Shop Description"
               />
             </div>
 

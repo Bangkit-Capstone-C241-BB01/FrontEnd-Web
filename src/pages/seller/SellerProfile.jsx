@@ -3,7 +3,7 @@ import Nav from "../../components/Nav";
 import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, updateUserProfile } from "../../redux/features/profile/profileThunks";
-
+import avatar from "../../assets/profile.jpg";
 const SellerProfile = () => {
   const dispatch = useDispatch();
   const profileState = useSelector((state) => state.profile);
@@ -111,7 +111,7 @@ const SellerProfile = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-2 flex flex-col items-center">
               <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 mb-2">
-                <img src={product.imagePreviewUrl || profileData.user_img} alt="Profile picture" className="w-full h-full" />
+                <img src={product.imagePreviewUrl || profileData.user_img || avatar} alt="Profile picture" className="w-full h-full" />
               </div>
               <div className="flex items-center">
                 <label className={`cursor-pointer ${product.imagePreviewUrl ? "hidden" : "bg-gray-200 hover:bg-gray-300"} text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center`} htmlFor="image">
