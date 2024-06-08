@@ -94,6 +94,15 @@ const Nav = ({ role }) => {
                     Profile
                   </NavLink>
                 </li>
+                <li className="p-2 cursor-pointer">
+                  <NavLink
+                    to="/seller/shop"
+                    className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
+                  >
+                    <BiSolidUser size={20} className="mr-2" />
+                    Shop Profile
+                  </NavLink>
+                </li>
               </>
             )}
           </ul>

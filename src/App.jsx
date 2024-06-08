@@ -17,6 +17,7 @@ import Register from "./pages/client/Register";
 import Favorites from "./pages/client/Favorites";
 import Profile from "./pages/client/Profile";
 import RequireAuth from "./components/RequireAuth";
+import ShopProfile from "./pages/seller/ShopProfile";
 function App() {
   return (
     <>
@@ -75,6 +76,14 @@ function App() {
           element={
             <RequireAuth role="seller">
               <SellerProfile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/shop"
+          element={
+            <RequireAuth role="seller">
+              <ShopProfile />
             </RequireAuth>
           }
         />

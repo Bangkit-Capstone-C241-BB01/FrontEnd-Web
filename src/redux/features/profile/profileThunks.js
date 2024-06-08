@@ -10,9 +10,9 @@ export const fetchUserProfile = createAsyncThunk("profile/fetchUserProfile", asy
   }
 });
 
-export const updateUserProfile = createAsyncThunk("profile/updateUserProfile", async (profileData, { rejectWithValue }) => {
+export const updateUserProfile = createAsyncThunk("profile/updateUserProfile", async ({ role, profileData }, { rejectWithValue }) => {
   try {
-    const data = await updateProfile(profileData);
+    const data = await updateProfile(role, profileData);
     return data;
   } catch (error) {
     return rejectWithValue(error.response.data);
