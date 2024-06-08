@@ -18,6 +18,8 @@ import Favorites from "./pages/client/Favorites";
 import Profile from "./pages/client/Profile";
 import RequireAuth from "./components/RequireAuth";
 import ShopProfile from "./pages/seller/ShopProfile";
+import AppealReq from "./pages/seller/AppealReq";
+import AppealHistorySeller from "./pages/seller/AppealHistorySeller";
 function App() {
   return (
     <>
@@ -92,6 +94,22 @@ function App() {
           element={
             <RequireAuth role="seller">
               <DetailProduct />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/appeal"
+          element={
+            <RequireAuth role="seller">
+              <AppealHistorySeller />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/seller/req-appeal/:id"
+          element={
+            <RequireAuth role="seller">
+              <AppealReq />
             </RequireAuth>
           }
         />

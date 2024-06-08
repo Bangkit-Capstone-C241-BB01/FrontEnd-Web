@@ -87,6 +87,14 @@ const Nav = ({ role }) => {
                 </li>
                 <li className="p-2 cursor-pointer">
                   <NavLink
+                    to="/seller/appeal"
+                    className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
+                  >
+                    Appeal History
+                  </NavLink>
+                </li>
+                <li className="p-2 cursor-pointer">
+                  <NavLink
                     to="/seller/profile"
                     className={({ isActive }) => `font-roboto flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}
                   >
