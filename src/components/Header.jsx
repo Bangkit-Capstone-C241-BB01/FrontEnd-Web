@@ -9,8 +9,10 @@ const Header = ({ role }) => {
   const profileState = useSelector((state) => state.profile);
   const [profileData, setProfileData] = useState({});
   useEffect(() => {
-    dispatch(fetchUserProfile(role));
-  }, [dispatch]);
+    if (role === "seller") {
+      dispatch(fetchUserProfile(role));
+    }
+  }, [dispatch, role]);
   useEffect(() => {
     if (profileState.profileData) {
       setProfileData(profileState.profileData);
