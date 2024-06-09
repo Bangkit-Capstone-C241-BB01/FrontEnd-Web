@@ -7,7 +7,7 @@ const PieChart = ({ data }) => {
 
   useEffect(() => {
     if (!data || !data.dashboard || data.dashboard.length === 0) {
-      return; // Tidak perlu melakukan apapun jika data belum tersedia
+      return;
     }
 
     if (chartInstance.current) {

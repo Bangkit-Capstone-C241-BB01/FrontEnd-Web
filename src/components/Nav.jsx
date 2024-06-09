@@ -15,7 +15,7 @@ const Nav = ({ role }) => {
   const handleLogOut = () => {
     dispatch(logout());
     removeToken(role);
-    navigate("/seller");
+    navigate(`/${role}`);
   };
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

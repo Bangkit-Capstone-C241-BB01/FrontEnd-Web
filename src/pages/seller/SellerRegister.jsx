@@ -58,9 +58,9 @@ const SellerRegister = () => {
       <div className="flex justify-center items-center mb-3">
         <div className="rounded-xl bg-primary shadow-md p-8 w-3/4 lg:w-2/4 text-white">
           <h2 className="text-xl md:text-2xl mb-1 text-center">Register</h2>
-          {auth.error && <p className="text-red-500 text-center">{auth.error.msg}</p>}
+          {auth.loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white-500">Loading...</div>}
+          {auth.error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white-500">{auth.error.msg}</div>}
           <form onSubmit={handleRegister}>
-            {error && <p className="text-red-500 text-center">{error}</p>}
             <div className="mb-1">
               <label className="block mb-1 lg:text-xl" htmlFor="sellerName">
                 Seller Name
