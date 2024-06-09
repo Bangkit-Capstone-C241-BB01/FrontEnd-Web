@@ -1,22 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../../components/SearchBar";
 import { useState } from "react";
-import Nav from "../../components/Nav";
 import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 import profile from "../../assets/profile.jpg";
 import Footer from "../../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile, updateUserProfile } from "../../redux/features/profile/profileThunks";
 const Profile = () => {
-  const [product, setProduct] = useState({
-    ShopName: "",
-    SellerName: "",
-    SellerEmail: "",
+  const dispatch = useDispatch();
+  const profileState = useSelector((state) => state.profile);
+  const [profileData, setProfileData] = useState({});
+
+  useEffect(() => {
+    dispatch(fetchUserProfile("customer"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (profileState.profileData) {
+      setProfileData(profileState.profileData);
+    }
+  }, [profileState.profileData]);
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
     imagePreviewUrl: "",
   });
 
+  useEffect(() => {
+    if (profileData) {
+      setData({
+        name: profileData.user_name || "",
+        email: profileData.user_email || "",
+        address: profileData.user_address || "",
+        phone: profileData.user_phone || "",
+        imagePreviewUrl: "",
+      });
+    }
+  }, [profileData]);
+  const [imageFile, setImageFile] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({
-      ...product,
+    setData({
+      ...data,
       [name]: value,
     });
   };
@@ -26,10 +55,11 @@ const Profile = () => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setProduct({
-        ...product,
+      setData({
+        ...data,
         imagePreviewUrl: reader.result,
       });
+      setImageFile(file);
     };
 
     if (file) {
@@ -43,22 +73,41 @@ const Profile = () => {
       input.value = "";
     }
 
-    setProduct({
-      ...product,
+    setData({
+      ...data,
       imagePreviewUrl: "",
     });
+    setImageFile(null);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
-    setProduct({
-      ShopName: "",
-      SellerName: "",
-      SellerEmail: "",
+
+    const formData = new FormData();
+    if (imageFile) {
+      formData.append("img_user", imageFile);
+    }
+    formData.append("user_email", data.email);
+    formData.append("user_name", data.name);
+    formData.append("user_phone", data.phone);
+    formData.append("user_address", data.address);
+    const role = "customer";
+    dispatch(updateUserProfile({ role: role, profileData: formData }));
+
+    setData({
+      name: "",
+      email: "",
+      address: "",
+      phone: "",
       imagePreviewUrl: "",
     });
+    setImageFile(null);
   };
+  useEffect(() => {
+    if (profileState.updateStatus === "succeeded") {
+      window.location.reload();
+    }
+  }, [profileState.updateStatus]);
 
   return (
     <div className="min-h-screen flex flex-col font-roboto">
@@ -70,15 +119,15 @@ const Profile = () => {
             <form onSubmit={handleSubmit} className="flex flex-col md:flex-row w-full">
               <div className="mb-2 flex flex-col items-center w-1/3">
                 <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 mb-2">
-                  <img src={product.imagePreviewUrl || profile} alt="Profile picture" className="w-full h-full" />
+                  <img src={data.imagePreviewUrl || profileData.user_img || profile} alt="Profile picture" className="w-full h-full" />
                 </div>
                 <div className="flex items-center">
-                  <label className={`cursor-pointer ${product.imagePreviewUrl ? "hidden" : "bg-gray-200 hover:bg-gray-300"} text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center`} htmlFor="image">
+                  <label className={`cursor-pointer ${data.imagePreviewUrl ? "hidden" : "bg-gray-200 hover:bg-gray-300"} text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center`} htmlFor="image">
                     <FaFileUpload className="w-4 h-4 mr-2" />
                     Change Image
                   </label>
                   <input type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} className="hidden" />
-                  {product.imagePreviewUrl && (
+                  {data.imagePreviewUrl && (
                     <div className="flex items-center">
                       <button type="button" className="ml-2 text-red-600 hover:text-red-800 focus:outline-none flex items-center" onClick={handleRemoveImage}>
                         <FaTimesCircle className="w-8 h-8" />
@@ -90,51 +139,66 @@ const Profile = () => {
               </div>
               <div className="w-2/3">
                 <div className="mb-2 lg:mb-3 ">
-                  <label className="block text-sm font-bold mb-1 lg:mb-2 lg:text-xl" htmlFor="title">
+                  <label className="block text-sm font-bold mb-1 lg:mb-2 lg:text-xl" htmlFor="name">
                     Name
                   </label>
                   <input
                     type="text"
-                    id="ShopName"
-                    name="ShopName"
-                    value={product.ShopName}
+                    id="name"
+                    name="name"
+                    value={data.name}
                     onChange={handleChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Shop Name"
+                    placeholder="Name"
                   />
                 </div>
                 <div className="mb-2 lg:mb-3">
-                  <label className="block  text-sm font-bold mb-1 lg:text-xl lg:mb-2" htmlFor="description">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    id="SellerName"
-                    name="SellerName"
-                    value={product.SellerName}
-                    onChange={handleChange}
-                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Seller Name"
-                  />
-                </div>
-                <div className="mb-2 lg:mb-3">
-                  <label className="block  text-sm font-bold mb-1 lg:text-xl lg:mb-2" htmlFor="stock">
+                  <label className="block  text-sm font-bold mb-1 lg:text-xl lg:mb-2" htmlFor="email">
                     Email
                   </label>
                   <input
                     type="email"
-                    id="SellerEmail"
-                    name="SellerEmail"
-                    value={product.SellerEmail}
+                    id="email"
+                    name="email"
+                    value={data.email}
                     onChange={handleChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Email"
+                    placeholder="email user"
+                  />
+                </div>
+                <div className="mb-2 lg:mb-3">
+                  <label className="block  text-sm font-bold mb-1 lg:text-xl lg:mb-2" htmlFor="address">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={data.address}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="address"
+                  />
+                </div>
+                <div className="mb-2 lg:mb-3">
+                  <label className="block  text-sm font-bold mb-1 lg:text-xl lg:mb-2" htmlFor="phone">
+                    Phone
+                  </label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={data.phone}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="phone"
                   />
                 </div>
                 <div className="flex items-center justify-between">
                   <button type="submit" className="bg-secondary hover:opacity-90 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">
                     Save
                   </button>
+                  {profileState.profileLoading && <p>Loading...</p>}
                 </div>
               </div>
             </form>

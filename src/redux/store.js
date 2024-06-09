@@ -6,6 +6,7 @@ import shopSellerReducer from "./features/seller/shop/shopSlice";
 import appealSellerReducer from "./features/seller/appeal/appealSlice";
 import dashboardAdminReducer from "./features/admin/dashboard/dashboardSlice";
 import adminAppealReducer from "./features/admin/adminAppeal/adAppealSlice";
+import customerProductReducer from "./features/client/product/clientProductSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     appealSeller: appealSellerReducer,
     dashboardAdmin: dashboardAdminReducer,
     adminAppeal: adminAppealReducer,
+    customerProduct: customerProductReducer,
   },
 });
 

@@ -20,7 +20,7 @@ const Header = ({ role }) => {
   }, [profileState.profileData]);
 
   return (
-    <div className="font-roboto flex justify-end items-center p-4 sticky top-0 bg-slate-100 z-10">
+    <div className="font-roboto flex justify-end items-center p-4 sticky top-0 bg-slate-100">
       <div className="flex items-center space-x-2">
         {role === "admin" ? (
           <>
