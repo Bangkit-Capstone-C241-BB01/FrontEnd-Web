@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logokecil from "../../assets/logokecilbewarna.png";
 import { Link, useNavigate } from "react-router-dom";
-
-const Login = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { getTokenCustomer } from "../../utils/cookies";
+import { login } from "../../redux/features/auth/authThunks";
+const LoginCustomer = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
 
-  const handleLogin = () => {
-    navigate("/home");
+  useEffect(() => {
+    const token = getTokenCustomer();
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({ user_email: email, user_password: password, role: "customer" }));
   };
+  if (isAuthenticated) {
+    navigate("/home");
+  }
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -20,19 +36,21 @@ const Login = () => {
       </div>
       <div className=" flex justify-center items-center ">
         <div className=" rounded-xl bg-primary shadow-md  p-8 w-3/4 lg:w-2/4 text-white">
-          <h2 className="text-2xl lg:text-4xl  mb-6 text-center">Login</h2>
+          <h2 className="text-2xl lg:text-4xl font-bold mb-6 text-center">Login</h2>
+          {loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white-500">Loading...</div>}
+          {error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white-500">{error.msg}</div>}
           <form>
             <div className="mb-4">
               <label className="block mb-2 lg:text-xl" htmlFor="email">
                 Email
               </label>
-              <input type="email" id="email" className="w-full p-2 text-secondary rounded" required />
+              <input type="email" id="email" className="w-full p-2 text-secondary rounded" onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="mb-6 relative">
               <label className="block mb-2 text-xl" htmlFor="password">
                 Password
               </label>
-              <input type={showPassword ? "text" : "password"} id="password" className="w-full p-2  text-secondary rounded" required />
+              <input type={showPassword ? "text" : "password"} id="password" onChange={(e) => setPassword(e.target.value)} className="w-full p-2  text-secondary rounded" required />
               <button type="button" onClick={togglePasswordVisibility} className="absolute right-2 top-14 transform -translate-y-1/2 text-secondary">
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -60,4 +78,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginCustomer;

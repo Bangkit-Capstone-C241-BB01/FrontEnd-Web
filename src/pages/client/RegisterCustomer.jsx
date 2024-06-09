@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/features/auth/authThunks";
+import { useEffect, useState } from "react";
 import logokecil from "../../assets/logokecilbewarna.png";
 import { Link, useNavigate } from "react-router-dom";
-import { getTokenSeller } from "../../utils/cookies";
-
-const SellerRegister = () => {
-  const [sellerName, setSellerName] = useState("");
-  const [storeName, setStoreName] = useState("");
-  const [sellerEmail, setSellerEmail] = useState("");
+import { useDispatch, useSelector } from "react-redux";
+import { getTokenCustomer } from "../../utils/cookies";
+import { register } from "../../redux/features/auth/authThunks";
+const RegisterCustomer = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -17,14 +15,14 @@ const SellerRegister = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
-    const token = getTokenSeller();
+    const token = getTokenCustomer();
     if (token) {
-      navigate("/seller/products");
+      navigate("/home");
     }
   }, [navigate]);
   useEffect(() => {
     if (auth.isAuthenticated) {
-      navigate("/seller/products");
+      navigate("/home");
     }
   }, [auth.isAuthenticated, navigate]);
 
@@ -36,11 +34,10 @@ const SellerRegister = () => {
     }
     dispatch(
       register({
-        user_name: sellerName,
-        user_email: sellerEmail,
+        user_name: name,
+        user_email: email,
         user_password: password,
-        user_role: "seller",
-        store_name: storeName,
+        user_role: "customer",
       })
     );
   };
@@ -48,7 +45,6 @@ const SellerRegister = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
   return (
     <div className="flex flex-col font-roboto">
       <div className="flex justify-start items-center mx-3 my-1">
@@ -60,20 +56,17 @@ const SellerRegister = () => {
           <h2 className="text-xl md:text-2xl font-bold mb-1 text-center">Register</h2>
           {auth.loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white-500">Loading...</div>}
           {auth.error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white-500">{auth.error.msg}</div>}
+          {error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white-500">{error}</div>}
           <form onSubmit={handleRegister}>
             <div className="mb-1">
-              <label className="block mb-1 lg:text-xl" htmlFor="sellerName">
-                Seller Name
+              <label className="block mb-1 lg:text-xl" htmlFor="name">
+                Name
               </label>
-              <input type="text" id="sellerName" className="w-full p-2 text-secondary rounded mb-1" value={sellerName} onChange={(e) => setSellerName(e.target.value)} required />
-              <label className="block mb-1 lg:text-xl" htmlFor="storeName">
-                Store Name
+              <input type="text" id="name" className="w-full p-2 text-secondary rounded mb-1" value={name} onChange={(e) => setName(e.target.value)} required />
+              <label className="block mb-1 lg:text-xl" htmlFor="email">
+                Email
               </label>
-              <input type="text" id="storeName" className="w-full p-2 text-secondary rounded mb-1" value={storeName} onChange={(e) => setStoreName(e.target.value)} required />
-              <label className="block mb-1 lg:text-xl" htmlFor="sellerEmail">
-                Seller Email
-              </label>
-              <input type="email" id="sellerEmail" className="w-full p-2 text-secondary rounded" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)} required />
+              <input type="email" id="email" className="w-full p-2 text-secondary rounded" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="mb-1 relative">
               <label className="block mb-1 lg:text-xl" htmlFor="password">
@@ -102,7 +95,7 @@ const SellerRegister = () => {
           <div className="mt-4 text-center">
             <div className="mt-2">
               Already have an account?
-              <Link to="/seller/login" className="text-secondary ml-2 hover:underline">
+              <Link to="/login" className="text-secondary ml-2 hover:underline">
                 Login!
               </Link>
             </div>
@@ -113,4 +106,4 @@ const SellerRegister = () => {
   );
 };
 
-export default SellerRegister;
+export default RegisterCustomer;
