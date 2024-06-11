@@ -62,9 +62,6 @@ const LoginCustomer = () => {
             </div>
           </form>
           <div className="mt-4 text-center">
-            <a href="#" className="block text-secondary hover:underline">
-              Forgot Username / Password?
-            </a>
             <div className="mt-2">
               Dont have an account?
               <Link to={"/register"} className="text-secondary ml-2 hover:underline">

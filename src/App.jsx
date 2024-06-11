@@ -14,12 +14,15 @@ import WelcomeSeller from "./pages/seller/WelcomeSeller";
 import Welcome from "./pages/client/Welcome";
 import LoginCustomer from "./pages/client/LoginCustomer";
 import RegisterCustomer from "./pages/client/RegisterCustomer";
-import Favorites from "./pages/client/Favorites";
 import Profile from "./pages/client/Profile";
 import RequireAuth from "./components/RequireAuth";
 import ShopProfile from "./pages/seller/ShopProfile";
 import AppealReq from "./pages/seller/AppealReq";
 import AppealHistorySeller from "./pages/seller/AppealHistorySeller";
+import DetailProdCus from "./pages/client/DetailProdCus";
+import SearchPage from "./pages/client/SearchPage";
+import StorePage from "./pages/client/StorePage";
+import DetailStoreCus from "./pages/client/DetailStoreCus";
 function App() {
   return (
     <>
@@ -37,10 +40,10 @@ function App() {
           }
         />
         <Route
-          path="/favorites"
+          path="/store"
           element={
             <RequireAuth role="customer">
-              <Favorites />
+              <StorePage />
             </RequireAuth>
           }
         />
@@ -49,6 +52,30 @@ function App() {
           element={
             <RequireAuth role="customer">
               <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/detail/:id"
+          element={
+            <RequireAuth role="customer">
+              <DetailProdCus />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/detailStore/:id"
+          element={
+            <RequireAuth role="customer">
+              <DetailStoreCus />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/search/:query"
+          element={
+            <RequireAuth role="customer">
+              <SearchPage />
             </RequireAuth>
           }
         />

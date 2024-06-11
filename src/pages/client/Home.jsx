@@ -5,12 +5,11 @@ import SearchBar from "../../components/SearchBar";
 import Banner1 from "../../assets/Banner1.png";
 import Banner2 from "../../assets/Banner2.png";
 import Banner3 from "../../assets/Banner3.png";
-import CategoryList from "../../components/CategoryList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchUserProfile } from "../../redux/features/profile/profileThunks";
-import { BiSolidUser } from "react-icons/bi";
 import avatar from "../../assets/profile.jpg";
+import { reset } from "../../redux/features/client/product/clientProductSlice";
 
 const Home = () => {
   let slides = [{ url: Banner1 }, { url: Banner2 }, { url: Banner3 }];
@@ -23,10 +22,9 @@ const Home = () => {
   useEffect(() => {
     if (profileState.profileData) {
       setProfileData(profileState.profileData);
+      dispatch(reset());
     }
   }, [profileState.profileData]);
-
-  console.log(profileData);
 
   return (
     <div className="min-h-screen flex flex-col font-roboto">
@@ -39,7 +37,6 @@ const Home = () => {
       </div>
       <main className="pt-1 pb-14 lg:pb-0">
         <Carousel slides={slides} />
-        {/* <CategoryList /> */}
         <ProductList />
       </main>
       <Footer />

@@ -1,5 +1,6 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineHeart, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
+import { FaStore } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
@@ -10,9 +11,9 @@ const Footer = () => {
           <AiOutlineHome size={24} className="mr-2" />
           Home
         </NavLink>
-        <NavLink to="/favorites" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto px-4 ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
-          <AiOutlineHeart size={24} className="mr-2" />
-          Favorite
+        <NavLink to="/store" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto px-4 ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
+          <FaStore size={24} className="mr-2" />
+          Store
         </NavLink>
         <NavLink to="/profile" className={({ isActive }) => `flex items-center justify-center w-full p-2 rounded-full hover:bg-secondary hover:text-white font-roboto px-4  ${isActive ? "bg-secondary text-white" : "text-black bg-white"}`}>
           <AiOutlineUser size={24} className="mr-2" />

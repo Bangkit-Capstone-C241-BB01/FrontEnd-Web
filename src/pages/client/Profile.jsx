@@ -6,11 +6,14 @@ import profile from "../../assets/profile.jpg";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, updateUserProfile } from "../../redux/features/profile/profileThunks";
+import { removeToken } from "../../utils/cookies";
+import { logout } from "../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const dispatch = useDispatch();
   const profileState = useSelector((state) => state.profile);
   const [profileData, setProfileData] = useState({});
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchUserProfile("customer"));
   }, [dispatch]);
@@ -108,7 +111,11 @@ const Profile = () => {
       window.location.reload();
     }
   }, [profileState.updateStatus]);
-
+  const handleLogOut = () => {
+    dispatch(logout());
+    removeToken("customer");
+    navigate(`/login`);
+  };
   return (
     <div className="min-h-screen flex flex-col font-roboto">
       <SearchBar />
@@ -116,7 +123,7 @@ const Profile = () => {
         <div className="ml-0 p-4  w-full font-roboto">
           <div className=" mx-auto w-full">
             <h1 className="text-3xl font-bold mb-2 w-full mt-1 lg:mt-0">Profile</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row w-full">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center md:flex-row w-full">
               <div className="mb-2 flex flex-col items-center w-1/3">
                 <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 mb-2">
                   <img src={data.imagePreviewUrl || profileData.user_img || profile} alt="Profile picture" className="w-full h-full" />
@@ -198,8 +205,12 @@ const Profile = () => {
                   <button type="submit" className="bg-secondary hover:opacity-90 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline">
                     Save
                   </button>
+
                   {profileState.profileLoading && <p>Loading...</p>}
                 </div>
+                <button onClick={handleLogOut} className="mb-20 md:mb-0 font-roboto py-2 px-8 my-2 rounded bg-red-700 text-white hover:bg-red-900">
+                  Log Out
+                </button>
               </div>
             </form>
           </div>
