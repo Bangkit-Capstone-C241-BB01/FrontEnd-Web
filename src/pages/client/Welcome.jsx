@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import logobesar from "../../assets/logobesar.png";
-
+import { getTokenCustomer } from "../../utils/cookies";
 const Welcome = () => {
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const token = getTokenCustomer();
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
   const handleLogin = () => {
     navigate("/login");
   };
