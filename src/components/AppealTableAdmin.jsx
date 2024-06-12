@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 import { BiZoomIn } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { approveAdAppeal, rejectAdAppeal } from "../redux/features/admin/adminAppeal/adAppealThunks";
 
@@ -12,12 +12,34 @@ const AppealTableAdmin = ({ data }) => {
   if (!data || data.length === 0) {
     return <div>Loading...</div>;
   }
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
   const handleApprove = (id) => {
     dispatch(approveAdAppeal(id));
   };
 
   const handleReject = (id) => {
     dispatch(rejectAdAppeal(id));
+  };
+
+  const getImageQualityColor = (quality) => {
+    switch (quality.trim().toLowerCase()) {
+      case "blur":
+        return "bg-red-500 text-white";
+      case "bokeh":
+        return "bg-yellow-500 text-white";
+      case "normal":
+        return "bg-green-500 text-white";
+      default:
+        return "";
+    }
   };
   return (
     <div className="ml-0 lg:ml-64 p-4 w-full font-roboto">
@@ -27,12 +49,12 @@ const AppealTableAdmin = ({ data }) => {
       {success && <div className="text-green-500">{success.msg}</div>}
       {error && <div className="text-red-500">{error.msg}</div>}
 
-      <table className="table-auto w-full border-collapse border border-gray-200">
+      <table className="table-auto w-full border-collapse border border-gray-200 -z-10">
         <thead>
           <tr>
-            <th className="border border-gray-200 p-2">Store Name</th>
             <th className="border border-gray-200 p-2">Username</th>
             <th className="border border-gray-200 p-2">Product Name</th>
+            <th className="border border-gray-200 p-2">Image Quality</th>
             <th className="border border-gray-200 p-2">Image</th>
             <th className="border border-gray-200 p-2">Reason</th>
             <th className="border border-gray-200 p-2">Action</th>
@@ -41,11 +63,11 @@ const AppealTableAdmin = ({ data }) => {
         <tbody className="text-center">
           {data.map((appeal, index) => (
             <tr key={index}>
-              <td className="border border-gray-200 p-2">{appeal.store_name}</td>
               <td className="border border-gray-200 p-2">{appeal.user_name}</td>
               <td className="border border-gray-200 p-2">{appeal.product_name}</td>
+              <td className={`px-1  whitespace-nowrap ${getImageQualityColor(appeal.img_quality)}`}>{appeal.img_quality}</td>
               <td className="border border-gray-200 p-2 flex flex-col justify-center items-center relative">
-                <img src={appeal.product_img} alt="product" className="w-16 h-16 object-cover cursor-pointer mb-1" onClick={() => setSelectedImage(appeal.product_img)} />
+                <img src={appeal.product_img} alt="product" className="w-16 h-16 object-cover z-0 cursor-pointer mb-1" onClick={() => setSelectedImage(appeal.product_img)} />
                 <button className="absolute top-1 right-1 text-xl text-white bg-blue-600 p-1 rounded-full" onClick={() => setSelectedImage(appeal.product_img)}>
                   <BiZoomIn />
                 </button>

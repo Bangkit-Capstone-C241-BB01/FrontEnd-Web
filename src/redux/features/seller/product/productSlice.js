@@ -13,6 +13,7 @@ const productSlice = createSlice({
       product_category: "",
       img_product: "",
     },
+    isSuccess: false,
     loading: false,
     error: null,
   },
@@ -68,14 +69,17 @@ const productSlice = createSlice({
       .addCase(addProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.isSuccess = false;
       })
-      .addCase(addProduct.fulfilled, (state, action) => {
+      .addCase(addProduct.fulfilled, (state) => {
         state.data = null;
         state.loading = false;
+        state.isSuccess = true;
       })
       .addCase(addProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.isSuccess = false;
       });
   },
 });

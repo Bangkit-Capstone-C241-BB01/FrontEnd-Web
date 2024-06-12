@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import SearchBar from "../../components/SearchBar";
 import { useDispatch, useSelector } from "react-redux";

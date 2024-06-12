@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../redux/features/seller/product/productThunks";
 import Nav from "../../components/Nav";
@@ -7,7 +7,7 @@ import { FaFileUpload, FaTimesCircle } from "react-icons/fa";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.sellerProduct);
+  const { error, loading, isSuccess } = useSelector((state) => state.sellerProduct);
   const [product, setProduct] = useState({
     product_name: "",
     product_price: "",
@@ -17,7 +17,17 @@ const AddProduct = () => {
     product_category: "",
     img_product: null,
   });
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setShowSuccessMessage(true);
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({
@@ -69,6 +79,7 @@ const AddProduct = () => {
             <h1 className="text-3xl font-bold mb-6">Add Product</h1>
             {loading && <div className="rounded-md  text-center bg-gray-500 mb-4 text-white">Loading...</div>}
             {error && <div className="rounded-md  text-center bg-red-500 mb-4 text-white">Error: {error.msg}</div>}
+            {showSuccessMessage && <div className="rounded-md text-center bg-green-500 mb-4 text-white">Success Add Product</div>}
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-bold mb-2" htmlFor="image">

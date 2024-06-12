@@ -40,18 +40,10 @@ const DetailProduct = () => {
     }
   };
 
-  const getAppeal = (quality) => {
-    switch (quality) {
-      case "Normal":
-        return "hidden";
-      case "Bokeh":
-        return "flex";
-      case "Blur":
-        return "flex";
-      default:
-        return "";
-    }
+  const shouldShowAppealButton = (quality) => {
+    return quality !== "Normal";
   };
+
   return (
     <>
       <Header role="seller" />
@@ -88,9 +80,11 @@ const DetailProduct = () => {
             <button className="mt-4 bg-secondary text-white rounded-lg p-2 px-5" onClick={handleBack}>
               Back
             </button>
-            <button className={`mt-4 p-2 px-5 bg-primary text-white rounded-lg ${getAppeal(productData.img_quality)}`} onClick={() => navigate(`/seller/req-appeal/${id}`)}>
-              Request Appeal
-            </button>
+            {shouldShowAppealButton(productData.img_quality) && (
+              <button className="mt-4 p-2 px-5 bg-primary text-white rounded-lg" onClick={() => navigate(`/seller/req-appeal/${id}`)}>
+                Request Appeal
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import placeholder from "../assets/store.jpg";
 const StoreList = ({ store }) => {
   if (!store || store.length === 0) {
     return <div>Loading...</div>;
@@ -10,7 +10,7 @@ const StoreList = ({ store }) => {
       {store.length > 0 ? (
         store.map((item, index) => (
           <Link key={index} to={`/detailStore/${item.store_id}`} className="border rounded-lg overflow-hidden shadow-lg">
-            <img src={item.store_img} alt={item.store_name} className="w-full h-48 object-cover" /> {/* Access properties directly from 'item' */}
+            <img src={item.store_img || placeholder} alt={item.store_name} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h2 className="text-lg font-bold">{item.store_name}</h2>
               <p className="text-gray-700">{item.store_price}</p>

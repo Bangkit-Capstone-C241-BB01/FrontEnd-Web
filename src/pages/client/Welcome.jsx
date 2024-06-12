@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import logobesar from "../../assets/logobesar.png";
 import { getTokenCustomer } from "../../utils/cookies";
+import { useEffect } from "react";
 const Welcome = () => {
   const navigate = useNavigate();
   useEffect(() => {
