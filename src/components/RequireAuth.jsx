@@ -18,7 +18,7 @@ const RequireAuth = ({ children, role }) => {
       break;
     case "admin":
       token = getTokenAdmin();
-      loginPath = "/admin/login";
+      loginPath = "/admin";
       break;
     default:
       throw new Error("Invalid role");
